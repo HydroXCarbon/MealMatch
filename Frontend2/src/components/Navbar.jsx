@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +24,16 @@ const Navbar = () => {
           } md:flex flex-col md:flex-row items-center absolute md:static top-16 left-0 w-full md:w-auto bg-mealmatch-teal md:bg-transparent transition-all duration-300`}
         >
           <ul className="flex flex-col md:flex-row gap-4 md:gap-6 text-white uppercase text-sm">
-            <li><a href="#" aria-label="Navigate to Home" className="hover:text-gray-200">Home</a></li>
-            <li><a href="#" aria-label="Navigate to News" className="hover:text-gray-200">News</a></li>
+            <li>
+              <Link to="/" aria-label="Navigate to Home" className="hover:text-gray-200">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/saved" aria-label="Navigate to Home" className="hover:text-gray-200">
+                Saved
+              </Link>
+            </li>
             <li><a href="#" aria-label="Navigate to Price" className="hover:text-gray-200">Price</a></li>
             <li><a href="#" aria-label="Navigate to About" className="hover:text-gray-200">About</a></li>
             <li><a href="#" aria-label="Navigate to Contact" className="hover:text-gray-200">Contact</a></li>

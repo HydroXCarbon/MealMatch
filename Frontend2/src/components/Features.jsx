@@ -34,7 +34,7 @@ const FeatureCard = ({ title, description, icon }) => (
     ];
   
     return (
-      <section className="bg-mealmatch-offwhite py-12">
+      <section className="py-12" style={{ backgroundColor: '#FDFFEF' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
