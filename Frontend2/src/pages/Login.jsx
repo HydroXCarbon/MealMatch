@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import grilledFood from "../assets/MealPic/image_2.png";
@@ -16,9 +16,14 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('/api/login', { username, password });
+      const response = await axios.post('http://localhost:8082/user/', { username:username, password:Number(password) });
       const token = response.data.token;
+      const uid = response.data.id;
       localStorage.setItem("token", token);
+      // localStorage.setItem("uid", uid);
+      console.log(token);
+      // console.log(uid);
+      navigate('/');
       if (response.status === 200) {
         alert("Login successful!");
         navigate('/');

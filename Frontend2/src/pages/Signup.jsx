@@ -23,10 +23,14 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post('/api/signup', { username, password });
+      const response = await axios.post('http://localhost:8082/user/signup', { username: username,password: Number(password) });
       const token = response.data.token;
+      const uid = response.data.id;
       localStorage.setItem("token", token);
-
+      // localStorage.setItem("uid", uid);
+      // console.log(uid);
+      console.log(token);
+      navigate('/');
       if (response.status === 201) {
         navigate('/');
       }

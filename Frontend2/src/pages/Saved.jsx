@@ -3,6 +3,8 @@ import { MapPin, Star, Heart } from "lucide-react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+
 
 const defaultData = [
   {
@@ -48,7 +50,15 @@ const Saved = () => {
   useEffect(() => {
     const fetchSavedRestaurants = async () => {
       try {
-        const response = await axios.get('/api/saved');
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId; // Adjust this based on your token structure
+        console.log('User ID:', userId);
+        const response = await axios.get(`/saved/${userId}`);
         if (response.data && Array.isArray(response.data) && response.data.length > 0) {
           setRestaurants(response.data);
         }
