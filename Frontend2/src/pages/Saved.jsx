@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { MapPin, Star,Heart } from "lucide-react";
+import { MapPin, Star, Heart } from "lucide-react";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import axios from 'axios';
 
 const defaultData = [
   {
@@ -45,18 +46,27 @@ const Saved = () => {
   const [restaurants, setRestaurants] = useState(defaultData);
 
   useEffect(() => {
-    fetch('/api/saved')
-      .then(res => res.json())
-      .then(data => {
-        if (data && Array.isArray(data) && data.length > 0) {
-          setRestaurants(data);
+    const fetchSavedRestaurants = async () => {
+      try {
+        const response = await axios.get('/api/saved');
+        if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+          setRestaurants(response.data);
         }
-      })
-      .catch(err => console.error('Failed to fetch saved restaurants:', err));
+      } catch (error) {
+        console.error('Failed to fetch saved restaurants:', error);
+      }
+    };
+
+    fetchSavedRestaurants();
   }, []);
 
-  const handleDelete = (id) => {
-    //setRestaurants(prev => prev.filter(r => r._id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/saved/${id}`);
+      setRestaurants((prev) => prev.filter((r) => r._id !== id));
+    } catch (error) {
+      console.error('Failed to delete restaurant:', error);
+    }
   };
 
   return (
@@ -68,7 +78,7 @@ const Saved = () => {
         <p className="text-teal-600 mb-6">Your favorite dining spots</p>
 
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {restaurants.map(r => (
+          {restaurants.map((r) => (
             <div key={r._id} className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
               <img
                 src={r.image}
@@ -83,14 +93,14 @@ const Saved = () => {
                   </h2>
                   <p className="text-teal-500">
                     <Heart className="h-6 w-6" fill="currentColor" />
-                </p>
+                  </p>
                 </div>
 
                 <div className="mt-2">
-                    <p className="text-gray-600 text-sm flex items-center">
-                        <MapPin className="w-4 h-4 mr-1 text-red-500" />
-                        {r.location}
-                    </p>
+                  <p className="text-gray-600 text-sm flex items-center">
+                    <MapPin className="w-4 h-4 mr-1 text-red-500" />
+                    {r.location}
+                  </p>
                   <p className="text-gray-800 text-sm mt-1 flex items-center">
                     <Star className="w-4 h-4 mr-1 text-yellow-500" />
                     {r.rating.toFixed(1)}

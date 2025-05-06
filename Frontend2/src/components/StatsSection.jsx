@@ -28,7 +28,10 @@ const StatsSection = () => {
           <p className="text-lg md:text-xl mt-6 leading-relaxed">
             With over 10k+ restaurants, 100k+ users, and a 4.5/5 rating, MealMatch helps you discover the best dining spots effortlessly. Whether you're in the mood for comfort food, a trendy café, or a fine dining experience, our smart recommendations ensure you find the perfect place every time. Customize your search by mood, cuisine, and budget, and let MealMatch do the rest. Your next favorite meal is just a click away!
           </p>
-          <a href="#" className="mt-4 inline-block bg-mealmatch-teal text-white text-sm font-medium py-2 px-4 rounded-full hover:bg-teal-700 transition">
+          <a
+            href="#"
+            className="inline-block bg-mealmatch-teal text-white text-lg font-medium py-3 px-8 rounded-full hover:bg-teal-700 transition-all duration-300 shadow-md hover:shadow-xl w-fit mt-8"
+          >
             Read more
           </a>
         </div>

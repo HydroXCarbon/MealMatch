@@ -30,7 +30,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/saved" aria-label="Navigate to Home" className="hover:text-gray-200">
+              <Link to="/saved" aria-label="Navigate to Saved" className="hover:text-gray-200">
                 Saved
               </Link>
             </li>
@@ -38,12 +38,15 @@ const Navbar = () => {
             <li><a href="#" aria-label="Navigate to About" className="hover:text-gray-200">About</a></li>
             <li><a href="#" aria-label="Navigate to Contact" className="hover:text-gray-200">Contact</a></li>
           </ul>
+          <Link to="/signup" aria-label="Navigate to Sign up" className="hover:text-gray-200">
           <button
             className="mt-4 md:mt-0 md:ml-6 border border-white text-white px-4 py-2 rounded-full hover:bg-white hover:text-mealmatch-teal transition"
             aria-label="Get started with MealMatch"
           >
-            Get Started
+            Signup
           </button>
+          </Link>
+
         </div>
       </div>
     </nav>
