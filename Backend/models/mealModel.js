@@ -6,8 +6,6 @@ const mealSchema = new Schema(
     {
         mealName: { type: String, required: true },
         mealImage: { type: String, required: true },
-        instructions: { type: String, required: true },
-        imageUrl: { type: String, required: true },
         userId: { type: mongoose.Types.ObjectId, required: true, ref: "Users" },
     },
     {

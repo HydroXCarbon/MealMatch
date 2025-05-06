@@ -36,6 +36,7 @@ const login = async (req, res, next) => {
             "Could not log you in, please check your credentials and try again.",
             500
         );
+        return next(error)
     }
 
     if (!isValidPassword) {
