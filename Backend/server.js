@@ -31,13 +31,14 @@ const authenticateToken = (req, res, next) => {
 };
 
 app.use("/home", userRoutes);
-// app.use("/Meal", authenticateToken, mealRoutes);
+app.use("/Meal", authenticateToken, mealRoutes);
 
 mongoose.connect(
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@mealmatch.uo2sfna.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=MealMatch`
 ).then(() => {
-    app.listen(8082);
-    console.log("Connected to MongoDB and server is running on port 8082");
+    app.listen(8082, "0.0.0.0", () => {
+        console.log("Connected to MongoDB and server is running on port 8082");
+    });
 }).catch((err) => {
     console.log("Error connecting to MongoDB:", err);
 });
