@@ -60,7 +60,19 @@ const update_favorite = async (req, res, next) => {
     });
     if (!existingMeal) {
       // Create a new meal if it doesn't exist
-      const newMeal = new Meal({ meal });
+      const newMeal = new Meal({
+        name: meal.name,
+        photoUrl: meal.photoUrl,
+        rating: meal.rating,
+        num_reviews: meal.num_reviews,
+        price_level: meal.price_level,
+        ranking: meal.ranking,
+        cuisine: meal.cuisine,
+        address: meal.address,
+        phone: meal.phone,
+        web_url: meal.web_url,
+        website: meal.website,
+      });
       existingMeal = await newMeal.save();
     }
   } catch (err) {
