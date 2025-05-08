@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import { useAxios } from '../axiosConfig/AxiosContext';
+
 
 const Navbar = () => {
+  const axios = useAxios();
   const [isOpen, setIsOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("token"));
   const navigate = useNavigate();
