@@ -16,7 +16,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8082/user/', { username:username, password:Number(password) });
+      const response = await axios.post('/home/login', { username:username, password:password });
       const token = response.data.token;
       const uid = response.data.id;
       localStorage.setItem("token", token);
