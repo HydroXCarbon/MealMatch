@@ -34,7 +34,7 @@ const Signup = () => {
       console.log(token);
       navigate("/");
       if (response.status === 201) {
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       if (error.response) {
