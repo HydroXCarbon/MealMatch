@@ -1,0 +1,29 @@
+.mapContainer {
+    height: 80vh;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .markerContainer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  .tooltipPaper {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
+  }
+  
+  .tooltipPaper .MuiTypography-root {
+    text-align: center;
+  }
+  
+  .pointer {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+  }

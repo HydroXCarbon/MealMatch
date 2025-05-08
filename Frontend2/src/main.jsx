@@ -1,13 +1,17 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App.jsx";
+import axiosInstance from "./axiosConfig.js";
 import { AxiosProvider } from "./axiosConfig/AxiosContext.jsx";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <AxiosProvider>
-      <App />
-    </AxiosProvider>
-  </StrictMode>
+ReactDOM.render(
+    <StrictMode>
+        <AxiosProvider>
+            <ThemeProvider theme={createTheme()}>
+                <App />
+            </ThemeProvider>
+        </AxiosProvider>
+    </StrictMode>
 );
