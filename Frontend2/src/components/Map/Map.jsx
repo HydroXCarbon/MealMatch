@@ -26,7 +26,7 @@ const Map = ({
         >
             <GoogleMapReact
                 bootstrapURLKeys={{
-                    key: "AIzaSyCBnfnDnJjVw7J0MZpPcBpk1DzV_U6CtcU",
+                    key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
                 }}
                 defaultCenter={coordinates}
                 center={coordinates}

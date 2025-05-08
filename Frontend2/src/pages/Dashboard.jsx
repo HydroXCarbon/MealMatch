@@ -31,8 +31,7 @@ const Dashboard = () => {
                         //   lang: 'en_US'
                     },
                     headers: {
-                        "x-rapidapi-key":
-                            "c933f5e3e9mshd80b01a9163ccfbp1d8addjsn4d500695c294",
+                        "x-rapidapi-key":import.meta.env.VITE_APP_RAPIDAPI_API_KEY,
                         "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
                     },
                 }
