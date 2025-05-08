@@ -39,7 +39,7 @@ const Saved = () => {
     }
   };
 
-  const createPDF = (restaurant_list) => {
+  const createPDF = () => {
     const doc = new jsPDF();
 
     doc.setFontSize(18);
@@ -53,7 +53,9 @@ const Saved = () => {
       "Ranking",
       "Website",
     ];
-    const rows = restaurant_list.map((r) => [
+
+    // Use the restaurants state directly
+    const rows = restaurants.map((r) => [
       r.name || "",
       r.address || "",
       r.rating || "",
@@ -62,7 +64,7 @@ const Saved = () => {
       r.website || "",
     ]);
 
-    autoTable({
+    autoTable(doc, {
       head: [columns],
       body: rows,
       startY: 30,
@@ -148,16 +150,15 @@ const Saved = () => {
             </div>
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => createPDF(restaurants)}
+            className="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-6 rounded-full shadow-lg transition"
+          >
+            Create PDF
+          </button>
+        </div>
       </main>
-
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
-        <button
-          onClick={createPDF}
-          className="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-6 rounded-full shadow-lg transition"
-        >
-          Create PDF
-        </button>
-      </div>
     </div>
   );
 };
