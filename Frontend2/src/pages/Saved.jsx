@@ -1,69 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { MapPin, Star, Heart } from "lucide-react";
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-
-
-const defaultData = [
-  {
-    _id: '1',
-    name: 'The Green Garden',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4.7,
-    location: '123 Elm St, City'
-  },
-  {
-    _id: '2',
-    name: 'Ocean Breeze Sushi',
-    image: 'https://plus.unsplash.com/premium_photo-1661953124283-76d0a8436b87?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4.9,
-    location: '456 Harbor Rd, City'
-  },
-  {
-    _id: '3',
-    name: 'Spice Route Curry',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4.5,
-    location: '789 Pine St, City'
-  },
-  {
-    _id: '4',
-    name: 'Bella Pasta',
-    image: 'https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4.6,
-    location: '321 Oak Ave, City'
-  },
-  {
-    _id: '5',
-    name: 'Urban Burger Co.',
-    image: 'https://images.unsplash.com/photo-1556742393-d75f468bfcb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 4.4,
-    location: '654 Maple Blvd, City'
-  }
-];
+import React, { useEffect, useState } from "react";
+import { MapPin, Star, Heart, DollarSign, Award, Globe } from "lucide-react";
+import Navbar from "../components/Navbar";
+import { useAxios } from "../axiosConfig/AxiosContext";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const Saved = () => {
-  const [restaurants, setRestaurants] = useState(defaultData);
+  const [restaurants, setRestaurants] = useState([]);
+  let restaurant_list = [];
+  const axios = useAxios();
 
   useEffect(() => {
     const fetchSavedRestaurants = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) {
-          console.error('No token found');
-          return;
-        }
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userId; // Adjust this based on your token structure
-        console.log('User ID:', userId);
-        const response = await axios.get(`/saved/${userId}`);
-        if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-          setRestaurants(response.data);
+        const response = await axios.get(`/meal/favorite`);
+
+        // Set the favoriteMeals array to the restaurants state
+        if (response.data && Array.isArray(response.data.favoriteMeals)) {
+          setRestaurants(response.data.favoriteMeals);
+          restaurant_list = response.data.favoriteMeals;
         }
       } catch (error) {
-        console.error('Failed to fetch saved restaurants:', error);
+        console.error("Failed to fetch saved restaurants:", error);
       }
     };
 
@@ -72,11 +30,50 @@ const Saved = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/saved/${id}`);
-      setRestaurants((prev) => prev.filter((r) => r._id !== id));
+      await axios.delete("/meal/favorite", {
+        data: { mealId: id },
+      });
+      window.location.reload();
     } catch (error) {
-      console.error('Failed to delete restaurant:', error);
+      console.error("Failed to delete restaurant:", error);
     }
+  };
+
+  const createPDF = () => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Saved Restaurants", 14, 20);
+
+    const columns = [
+      "Name",
+      "Address",
+      "Rating",
+      "Price Level",
+      "Ranking",
+      "Website",
+    ];
+
+    // Use the restaurants state directly
+    const rows = restaurants.map((r) => [
+      r.name || "",
+      r.address || "",
+      r.rating || "",
+      r.price_level || "",
+      r.ranking || "",
+      r.website || "",
+    ]);
+
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      startY: 30,
+      theme: "grid",
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [22, 160, 133] },
+    });
+
+    doc.save("Saved_Restaurants.pdf");
   };
 
   return (
@@ -84,14 +81,19 @@ const Saved = () => {
       <Navbar />
 
       <main className="flex-grow container mx-auto pt-24 px-4 py-8">
-        <h1 className="text-3xl font-bold text-teal-700 mb-2">Saved Restaurants</h1>
+        <h1 className="text-3xl font-bold text-teal-700 mb-2">
+          Saved Restaurants
+        </h1>
         <p className="text-teal-600 mb-6">Your favorite dining spots</p>
 
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {restaurants.map((r) => (
-            <div key={r._id} className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            <div
+              key={r._id}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col"
+            >
               <img
-                src={r.image}
+                src={r.photoUrl}
                 alt={r.name}
                 className="h-48 w-full object-cover"
               />
@@ -109,18 +111,34 @@ const Saved = () => {
                 <div className="mt-2">
                   <p className="text-gray-600 text-sm flex items-center">
                     <MapPin className="w-4 h-4 mr-1 text-red-500" />
-                    {r.location}
+                    {r.address}
                   </p>
                   <p className="text-gray-800 text-sm mt-1 flex items-center">
                     <Star className="w-4 h-4 mr-1 text-yellow-500" />
-                    {r.rating.toFixed(1)}
+                    {r.rating}
+                  </p>
+                  <p className="text-gray-800 text-sm mt-1 flex items-center">
+                    <DollarSign className="w-4 h-4 mr-1 text-green-500" />
+                    {r.price_level}
+                  </p>
+                  <p className="text-gray-800 text-sm mt-1 flex items-center">
+                    <Award className="w-4 h-4 mr-1 text-blue-500" />
+                    {r.ranking}
+                  </p>
+                  <p className="text-gray-800 text-sm mt-1 flex items-center">
+                    <Globe className="w-4 h-4 mr-1 text-purple-500" />
+                    <a
+                      href={r.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      Visit Website
+                    </a>
                   </p>
                 </div>
 
                 <div className="mt-4 flex space-x-2">
-                  <button className="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 rounded-xl transition">
-                    View Details
-                  </button>
                   <button
                     onClick={() => handleDelete(r._id)}
                     className="flex-1 bg-red-500 hover:bg-red-900 text-white font-medium py-2 rounded-xl transition"
@@ -132,9 +150,15 @@ const Saved = () => {
             </div>
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => createPDF(restaurants)}
+            className="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-6 rounded-full shadow-lg transition"
+          >
+            Create PDF
+          </button>
+        </div>
       </main>
-
-      <Footer />
     </div>
   );
 };
