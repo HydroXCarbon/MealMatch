@@ -33,7 +33,7 @@ const Signup = () => {
       // localStorage.setItem("uid", uid);
       // console.log(uid);
       console.log(token);
-      navigate("/");
+      navigate("/dashboard");
       if (response.status === 201) {
         navigate("/");
       }

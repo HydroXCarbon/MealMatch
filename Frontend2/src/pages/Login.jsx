@@ -27,7 +27,7 @@ const Login = () => {
       navigate('/');
       if (response.status === 200) {
         alert("Login successful!");
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (error) {
       if (error.response) {
