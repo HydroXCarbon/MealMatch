@@ -22,7 +22,6 @@ function App() {
         <MapSection />
         <Newsletter />
       </main>
-      <Footer />
     </div>
   );
 }
