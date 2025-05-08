@@ -29,7 +29,7 @@ const get_favorite = async (req, res, next) => {
 
 const update_favorite = async (req, res, next) => {
   const userId = req.user.userId;
-  const { mealName, mealImage } = req.body;
+  const { meal } = req.body;
 
   let existingUser;
   try {
@@ -53,12 +53,25 @@ const update_favorite = async (req, res, next) => {
   // Check if the meal already exists in the database
   let existingMeal;
   try {
-    existingMeal = await Meal.findOne({ mealName, mealImage });
+    existingMeal = await Meal.findOne({
+      name: meal.name,
+      address: meal.address,
+      phone: meal.phone,
+    });
     if (!existingMeal) {
       // Create a new meal if it doesn't exist
       const newMeal = new Meal({
-        mealName,
-        mealImage,
+        name: meal.name,
+        photoUrl: meal.photoUrl,
+        rating: meal.rating,
+        num_reviews: meal.num_reviews,
+        price_level: meal.price_level,
+        ranking: meal.ranking,
+        cuisine: meal.cuisine,
+        address: meal.address,
+        phone: meal.phone,
+        web_url: meal.web_url,
+        website: meal.website,
       });
       existingMeal = await newMeal.save();
     }
