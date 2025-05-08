@@ -5,6 +5,40 @@ const User = require("../models/userModel");
 
 const HttpError = require("../models/http-errors");
 
+const tokenBlacklist = new Set();
+
+const logout = (req, res, next) => {
+    const token = req.header("Authorization")?.split(" ")[1];
+    if (!token) {
+        return res.status(401).json({ message: "No token provided." });
+    }
+
+    tokenBlacklist.add(token); // Add the token to the blacklist
+    res.json({ message: "Logged out successfully." });
+};
+
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.header("Authorization");
+    if (!authHeader) {
+        return res
+            .status(401)
+            .json({ message: "Access denied. No token provided." });
+    }
+    const token = authHeader.split(" ")[1];
+
+    if (tokenBlacklist.has(token)) {
+        return res.status(401).json({ message: "Token is invalid or expired." });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid token." });
+    }
+};
+
 const login = async (req, res, next) => {
     const { username, password } = req.body;
     let existingUser;
@@ -108,7 +142,7 @@ const signup = async (req, res, next) => {
         token = jwt.sign(
             { userId: createdUser.id, username: createdUser.username },
             process.env.JWT_KEY,
-            { expiresIn: "1h" }
+            { expiresIn: "1d" }
         );
         return res.json({ token, message: "Signed up successfully" });
     } catch (err) {
@@ -122,3 +156,5 @@ const signup = async (req, res, next) => {
 
 exports.login = login;
 exports.signup = signup;
+exports.logout = logout;
+exports.authenticateToken = authenticateToken;
