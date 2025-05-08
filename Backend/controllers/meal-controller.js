@@ -60,7 +60,7 @@ const update_favorite = async (req, res, next) => {
     });
     if (!existingMeal) {
       // Create a new meal if it doesn't exist
-      const newMeal = new Meal(meal);
+      const newMeal = new Meal({ meal });
       existingMeal = await newMeal.save();
     }
   } catch (err) {
