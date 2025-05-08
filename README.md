@@ -1,4 +1,4 @@
-Repository URL: https://github.com/HydroXCarbon/MealMatch
+Repository URL: https://github.com/HydroXCarbon/group03_project
 Video URL: https://drive.google.com/drive/folders/1e2loRHEuuHeTlCxA5bWpYHapORkB6VY8?usp=sharing
 Member:
 - Purin Pongpanich ID: 6513135
