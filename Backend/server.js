@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
+const authenticateToken = require("./controllers/user-controller").authenticateToken;
 
 const app = express();
 
@@ -12,23 +13,6 @@ require("dotenv").config();
 
 const userRoutes = require("./routes/user-routes");
 const mealRoutes = require("./routes/meal-routes");
-
-const authenticateToken = (req, res, next) => {
-    const authHeader = req.header("Authorization");
-    if (!authHeader) {
-        return res
-            .status(401)
-            .json({ message: "Access denied. No token provided." });
-    }
-    const token = authHeader.split(" ")[1];
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        return res.status(400).json({ message: "Invalid token." });
-    }
-};
 
 app.use("/home", userRoutes);
 app.use("/Meal", authenticateToken, mealRoutes);
