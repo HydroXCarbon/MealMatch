@@ -13,6 +13,7 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import Rating from "@mui/material/Rating";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import useStyles from "./styles";
@@ -121,11 +122,11 @@ const PlaceDetails = ({ place, selected, refProp }) => {
                         Website
                     </Button>
                     <IconButton
-                        size="small"
-                        color={liked ? "secondary" : "default"}
-                        onClick={() => setLiked(!liked)}
+                        aria-label="favorite"
+                        onClick={() => setLiked((prev) => !prev)}
+                        color={liked ? "error" : "default"}
                     >
-                        <FavoriteBorderIcon />
+                        {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}{" "}
                     </IconButton>
                 </CardActions>
             </CardContent>
@@ -134,3 +135,12 @@ const PlaceDetails = ({ place, selected, refProp }) => {
 };
 
 export default PlaceDetails;
+{
+    /* <Link
+                to="/saved"
+                aria-label="Navigate to Saved"
+                className="hover:text-gray-200"
+              >
+                Saved
+              </Link> */
+}
