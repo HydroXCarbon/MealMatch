@@ -7,6 +7,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 5174,
-    allowedHosts: 'all',
+    allowedHosts: ["mealmatch-1-7yhf.onrender.com"],
   },
 });
