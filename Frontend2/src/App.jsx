@@ -1,29 +1,34 @@
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import ContentSection from "./components/ContentSection";
-import DifferenceSection from "./components/DifferenceSection";
-import MapSection from "./components/MapSection";
-import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
-import StatsSection from "./components/StatsSection";
+import Index from "./pages/Index";
+import Saved from "./pages/Saved";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation(); // Get the current route
+
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="pt-16">
-        <Hero />
-        <Features />
-        <ContentSection />
-        <DifferenceSection />
-        <StatsSection />
-        <MapSection />
-        <Newsletter />
-      </main>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/saved" element={<Saved />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      {location.pathname !== "/signup" && location.pathname !== "/login" && <Footer />}
     </div>
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default AppWrapper;
