@@ -88,19 +88,6 @@ const PlaceDetails = ({ place, selected, refProp }) => {
             {place.ranking}
           </Typography>
         </Box>
-        {place?.awards?.map((award) => (
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            my={1}
-          >
-            <img src={award.images.small} alt={award.display_name} />
-            <Typography variant="subtitle2" color="textSecondary">
-              {award.display_name}
-            </Typography>
-          </Box>
-        ))}
         {place?.cuisine?.map(({ name }) => (
           <Chip
             key={name}
