@@ -3,9 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import grilledFood from "../assets/MealPic/image_2.png";
 import { FaHamburger, FaAppleAlt } from "react-icons/fa";
-import axios from "axios";
+import { useAxios } from '../axiosConfig/AxiosContext';
 
 const Signup = () => {
+  const axios = useAxios();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

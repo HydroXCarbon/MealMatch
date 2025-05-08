@@ -2,10 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import axiosInstance from "./axiosConfig.js";
+import { AxiosProvider } from "./axiosConfig/AxiosContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AxiosProvider>
+      <App />
+    </AxiosProvider>
   </StrictMode>
 );
