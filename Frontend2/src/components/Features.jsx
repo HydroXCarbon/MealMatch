@@ -20,25 +20,25 @@ const Features = () => {
   const features = [
     {
       title: "Mood-Based Picks",
-      description: "Get restaurant suggestions based on your mood, occasion, and ambiance.",
+      description: "Get restaurant suggestions based on your mood, occasion, and ambiance, whether it’s a romantic date, casual café, or lively hangout.",
       Icon: Smile,
     },
     {
       title: "Top-Rated Spots",
-      description: "Explore a curated list of the highest-rated restaurants.",
+      description: "Explore a curated list of the highest-rated restaurants based on user reviews, popularity, and quality.",
       Icon: Star,
     },
     {
       title: "Friend & Group Match",
-      description: "Decide where to eat by considering everyone’s preferences.",
+      description: "MealMatch helps you and your friends decide where to eat by considering everyone’s food preferences, past favorites, and dietary restrictions.",
       Icon: Users,
     },
   ];
 
   return (
     <section className="py-12" style={{ backgroundColor: '#FDFFEF' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}

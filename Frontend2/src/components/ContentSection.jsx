@@ -1,4 +1,4 @@
-import grilledFood from '../assets/MealPic/image_2.png';
+import grilledFood from '../assets/MealPic/image_5.png';
 
 const ContentSection = () => {
   return (

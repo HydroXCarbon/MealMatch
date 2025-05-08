@@ -1,4 +1,4 @@
-import grilledFood from '../assets/MealPic/image_2.png';
+import grilledFood from '../assets/MealPic/image_1.png';
 
 const DifferenceSection = () => {
   return (
