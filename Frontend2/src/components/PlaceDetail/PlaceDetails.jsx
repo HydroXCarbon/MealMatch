@@ -27,19 +27,23 @@ const PlaceDetails = ({ place, selected, refProp }) => {
     setLiked((prev) => !prev);
 
     try {
-      const response = await axios.post("/meal/favorite", {
-        name: place.name,
-        address: place.address,
-        phone: place.phone,
-        website: place.website,
-        photoUrl: place.photo,
-        rating: place.rating,
-        num_reviews: place.num_reviews,
-        price_level: place.price_level,
-        ranking: place.ranking,
-        cuisine: place.cuisine,
-        web_url: place.web_url,
-      });
+      const data = {
+        meal: {
+          name: place.name,
+          address: place.address,
+          phone: place.phone,
+          website: place.website,
+          photoUrl: place.photo.images.large.url,
+          rating: place.rating,
+          num_reviews: place.num_reviews,
+          price_level: place.price_level,
+          ranking: place.ranking,
+          cuisine: place.cuisine,
+          web_url: place.web_url,
+        },
+      };
+      console.log("data", data);
+      const response = await axios.post("/meal/favorite", data);
     } catch (error) {
       console.error("Error updating favorite status:", error);
     }
