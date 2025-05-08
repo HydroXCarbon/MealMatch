@@ -10,7 +10,16 @@ const mealSchema = new Schema(
     num_reviews: { type: String, required: false, default: "" },
     price_level: { type: String, required: false, default: "" },
     ranking: { type: String, required: false, default: "" },
-    cuisine: { type: [String], required: false, default: "" },
+    cuisine: {
+      type: [
+        {
+          key: { type: String, required: true },
+          name: { type: String, required: true },
+        },
+      ],
+      required: false,
+      default: [],
+    },
     address: { type: String, required: true },
     phone: { type: String, required: false, default: "" },
     web_url: { type: String, required: false, default: "" },
