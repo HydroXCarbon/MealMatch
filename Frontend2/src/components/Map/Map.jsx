@@ -18,9 +18,9 @@ const Map = ({
         <div
             className="mapContainer"
             style={{
-                height: "80vh",
-                width: "100vw",
-                margin: "0",
+                height: "calc(100vh - 64px)", // Adjust height dynamically
+                width: "100%",
+                margin: "0 auto",
                 padding: "0",
             }}
         >
@@ -32,7 +32,6 @@ const Map = ({
                 center={coordinates}
                 defaultZoom={14}
                 margin={[50, 50, 50, 50]}
-                // options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
                 onChange={(e) => {
                     setCoordinates({ lat: e.center.lat, lng: e.center.lng });
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });

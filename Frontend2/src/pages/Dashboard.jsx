@@ -118,8 +118,9 @@ const Dashboard = () => {
         <>
             <CssBaseline />
             <Header setCoordinates={setCoordinates} />
-            <Grid container spacing={3} style={{ width: "100%" }}>
-                <Grid item xs={12} md={4}>
+            <Grid container spacing={0} style={{ width: "100%", display: "flex", flexDirection: "row", margin: 0 }}>
+                {/* List Section */}
+                <Grid item xs={12} md={4} style={{ flex: "0 0 30%", margin: 0 }}>
                     <List
                         places={filteredPlaces.length ? filteredPlaces : places}
                         childClicked={childClicked}
@@ -132,7 +133,8 @@ const Dashboard = () => {
                         setCuisine={setCuisine}
                     />
                 </Grid>
-                <Grid item xs={12} md={8}>
+                {/* Map Section */}
+                <Grid item xs={12} md={8} style={{ flex: "1", margin: 0 }}>
                     <Map
                         setCoordinates={setCoordinates}
                         setBounds={setBounds}

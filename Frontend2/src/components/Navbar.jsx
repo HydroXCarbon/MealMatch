@@ -80,13 +80,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a
-                href="#"
-                aria-label="Navigate to Price"
-                className="hover:text-gray-200"
-              >
-                Price
-              </a>
+            <Link to="/dashboard" aria-label="Navigate to dash" className="hover:text-gray-200">
+                DASHBOARD
+              </Link>
             </li>
             <li>
               <a

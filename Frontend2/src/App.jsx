@@ -12,7 +12,8 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      {location.pathname !== "/dashboard" &&  <Navbar />}
+      
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/saved" element={<Saved />} />
@@ -20,7 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      {location.pathname !== "/signup" && location.pathname !== "/login" && <Footer />}
+      {location.pathname !== "/signup" && location.pathname !== "/dashboard" && location.pathname !== "/login" && <Footer />}
     </div>
   );
 }

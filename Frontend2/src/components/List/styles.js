@@ -1,29 +1,53 @@
 import { makeStyles } from "@mui/styles";
 
-export default makeStyles({
-    formControl: {
-        margin: "8px !important", // theme.spacing(1) = 8px
-        minWidth: 120,
-        marginBottom: "30px",
+export default makeStyles((theme) => ({
+    container: {
+        padding: "15px",
+        maxHeight: "calc(100vh - 64px)", // Adjust height to fit within the screen
+        overflowY: "auto", // Enable scrolling for overflow content
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
     },
-    selectEmpty: {
-        marginTop: "16px", // theme.spacing(2) = 16px
+    title: {
+        marginBottom: "20px", // Space below the title
+        fontSize: "1.5rem",
+        fontWeight: "bold",
+        textAlign: "center",
+        "@media (min-width:600px)": {
+            textAlign: "left",
+        },
+    },
+    filters: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "15px", // Space between filter fields
+        marginBottom: "20px",
+        "@media (min-width:600px)": {
+            flexDirection: "row",
+            justifyContent: "space-between",
+        },
+    },
+    formControl: {
+        minWidth: 120,
+        flex: 1,
     },
     loading: {
-        height: "600px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-    },
-    container: {
-        padding: "25px",
-    },
-    marginBottom: {
-        marginBottom: "30px",
+        height: "100%",
     },
     list: {
-        marginTop: "20px !important",
-        height: "75vh",
-        overflow: "auto !important",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "15px", // Space between cards
+        justifyContent: "center",
     },
-});
+    cardContainer: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%", // Ensure consistent card height
+    },
+}));
