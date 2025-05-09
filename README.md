@@ -1,11 +1,14 @@
-Repository URL: https://github.com/HydroXCarbon/group03_project
-Video URL: https://drive.google.com/drive/folders/1e2loRHEuuHeTlCxA5bWpYHapORkB6VY8?usp=sharing
-Member:
-- Purin Pongpanich ID: 6513135
-- Jarupat Chodsitanan ID: 6513161
-- Nopparuj Ritnatikul ID: 6513168
-
 # MealMatch
+
+Repository URL: [https://github.com/HydroXCarbon/group03_project](https://github.com/HydroXCarbon/group03_project)  
+Video URL: [https://drive.google.com/drive/folders/1e2loRHEuuHeTlCxA5bWpYHapORkB6VY8?usp=sharing](https://drive.google.com/drive/folders/1e2loRHEuuHeTlCxA5bWpYHapORkB6VY8?usp=sharing)
+
+## 👥 Member
+- **Purin Pongpanich** (ID: 6513135)  
+- **Jarupat Chodsitanan** (ID: 6513161)  
+- **Nopparuj Ritnatikul** (ID: 6513168)
+
+---
 
 > ⚠️ **หมายเหตุสำคัญ**  
 > เนื่องจากระบบใช้ Google Places API และ Rapid API แบบ **Free Plan** อาจมีข้อจำกัดเรื่องจำนวนคำขอ (request) ต่อเดือน เมื่อแตะขีดจำกัดแล้วจะไม่สามารถดึงข้อมูลร้านเพิ่มเติมได้จนกว่าจะถึงเดือนถัดไป  
@@ -65,7 +68,7 @@ MealMatch เป็นแอปพลิเคชันช่วยให้ค�
 
 ---
 
-### การติดตั้ง Backend
+### การติดตั้ง Backend (Backend ได้ถูก deploy แล้วที่ https://mealmatch-blii.onrender.com)
 1. เข้าไปที่โฟลเดอร์ `Backend`:
    ```bash
    cd Backend
@@ -81,12 +84,9 @@ MealMatch เป็นแอปพลิเคชันช่วยให้ค�
    npm start
    ```
 
-4. **Backend ได้ถูก deploy แล้ว** ที่:  
-   [https://mealmatch-blii.onrender.com](https://mealmatch-blii.onrender.com)
-
 ---
 
-### การติดตั้ง Frontend
+### การติดตั้ง Frontend (Frontend ได้ถูก deploy แล้วที่ https://mealmatch-1-7yhf.onrender.com)
 1. เข้าไปที่โฟลเดอร์ `Frontend`:
    ```bash
    cd Frontend
@@ -108,9 +108,6 @@ MealMatch เป็นแอปพลิเคชันช่วยให้ค�
    ```bash
    npm run dev
    ```
-
-5. **Frontend ได้ถูก deploy แล้ว** ที่:  
-   [https://mealmatch-1-7yhf.onrender.com](https://mealmatch-1-7yhf.onrender.com)
 
 ---
 
