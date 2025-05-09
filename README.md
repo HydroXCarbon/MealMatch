@@ -61,3 +61,62 @@ MealMatch เป็นแอปพลิเคชันช่วยให้ค�
    ```bash
    git clone https://github.com/your-username/MealMatch.git
    cd MealMatch
+   ```
+
+---
+
+### การติดตั้ง Backend
+1. เข้าไปที่โฟลเดอร์ `Backend`:
+   ```bash
+   cd Backend
+   ```
+
+2. ติดตั้ง dependencies:
+   ```bash
+   npm install
+   ```
+
+3. รันเซิร์ฟเวอร์:
+   ```bash
+   npm start
+   ```
+
+4. **Backend ได้ถูก deploy แล้ว** ที่:  
+   [https://mealmatch-blii.onrender.com](https://mealmatch-blii.onrender.com)
+
+---
+
+### การติดตั้ง Frontend
+1. เข้าไปที่โฟลเดอร์ `Frontend`:
+   ```bash
+   cd Frontend
+   ```
+
+2. ติดตั้ง dependencies:
+   ```bash
+   npm install
+   ```
+
+3. แก้ไขไฟล์ `axiosConfig.js` เพื่อชี้ไปที่ Backend URL:
+   - เปิดไฟล์ `Frontend/src/axiosConfig/axiosConfig.js`
+   - ตรวจสอบให้แน่ใจว่า `baseURL` ถูกตั้งค่าเป็น:
+     ```javascript
+     baseURL: "https://mealmatch-blii.onrender.com",
+     ```
+
+4. รันเซิร์ฟเวอร์:
+   ```bash
+   npm run dev
+   ```
+
+5. **Frontend ได้ถูก deploy แล้ว** ที่:  
+   [https://mealmatch-1-7yhf.onrender.com](https://mealmatch-1-7yhf.onrender.com)
+
+---
+
+### หมายเหตุ
+- หากต้องการแก้ไข URL ของ Backend ใน Frontend สามารถแก้ไขได้ที่ไฟล์:
+  ```javascript
+  Frontend/src/axiosConfig/axiosConfig.js
+  ```
+- หากต้องการ deploy ใหม่ ให้ทำตามขั้นตอนการ build และ deploy สำหรับ Backend และ Frontend ตามที่กำหนดในเอกสารของแพลตฟอร์มที่ใช้งาน (เช่น Render, Vercel, หรือ Netlify)
