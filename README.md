@@ -116,4 +116,3 @@ MealMatch เป็นแอปพลิเคชันช่วยให้ค�
   ```javascript
   Frontend/src/axiosConfig/axiosConfig.js
   ```
-- หากต้องการ deploy ใหม่ ให้ทำตามขั้นตอนการ build และ deploy สำหรับ Backend และ Frontend ตามที่กำหนดในเอกสารของแพลตฟอร์มที่ใช้งาน (เช่น Render, Vercel, หรือ Netlify)
